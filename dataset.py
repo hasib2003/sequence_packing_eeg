@@ -10,7 +10,6 @@ import mne
 import config
 from pre_processors import PreProcessor
 from utlis import Utlis
-import random
 
 class PhysioNet(Dataset):
 
