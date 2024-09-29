@@ -18,19 +18,23 @@ from dataset import PhysioNet
 def train(encoder, classifier, train_loader, val_loader, optimizer_enc, optimizer_cls, criterion, num_epochs, loss_train, loss_val, acc_train, acc_val):
 
     global best_eval_acc
+    
+    tq = tqdm(range(num_epochs), desc="Epochs", unit="epoch")
 
-    for epoch in tqdm(range(num_epochs), desc="Epochs", unit="epoch"):
-
+    for epoch in tq:
         encoder.train()
         classifier.train()
 
         epoch_loss = 0
         correct_train = 0
         total_train = 0
-        
-        # Training loop
-        for packed_batch_eeg, batch_labels, batch_identifiers in tqdm(train_loader, desc=f"Epoch {epoch+1}", unit="batch", leave=False):
 
+        # Training loop
+        for batch_idx, (packed_batch_eeg, batch_labels, batch_identifiers) in enumerate(train_loader, start=1):
+            
+            # Update the tqdm description to show the current batch number
+            tq.set_description(f"Train Epoch {epoch+1}/{num_epochs}, it {batch_idx}/{len(train_loader)}")
+         
             # Ensure correct shape of batch_data
             packed_batch_eeg = packed_batch_eeg.permute(0, 2, 1)  # Assuming the input needs permuting to [batch_size, channels, length]
             packed_batch_eeg = packed_batch_eeg.float().to(device)
@@ -90,7 +94,10 @@ def train(encoder, classifier, train_loader, val_loader, optimizer_enc, optimize
             val_loss = 0.0
             correct_val = 0
             total_val = 0
-            for packed_batch_eeg, batch_labels, batch_identifiers in tqdm(val_loader, desc=f"Validation Epoch {epoch+1}", unit="batch", leave=False):
+            for batch_idx, (packed_batch_eeg, batch_labels, batch_identifiers) in enumerate(val_loader, start=1):
+            
+            # Update the tqdm description to show the current batch number
+                tq.set_description(f"Validation Epoch {epoch+1}/{num_epochs}, it {batch_idx}/{len(train_loader)}")
 
                 # Ensure correct shape of batch_data
                 packed_batch_eeg = packed_batch_eeg.permute(0, 2, 1)
@@ -195,6 +202,10 @@ def random_split_tensors(split_ratio, *tensors, seed=None):
 
 
 if __name__ == "__main__":
+    best_eval_acc = 0
+    chk_point_best = "./best_chk.pth"
+    chk_point_last = "./last_chk.pth"
+
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     # loading raw_physio net dataset
