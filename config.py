@@ -7,3 +7,4 @@ os.environ['NUM_SUBJS'] = "10"
 os.environ['EPOCH_MIN'] = "0"
 os.environ['EPOCH_MAX'] = "2.0"
 os.environ["SAMPLE_RATE"]='160'
+os.environ["BATCH_SIZE"]='4'

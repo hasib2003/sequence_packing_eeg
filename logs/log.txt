@@ -1,0 +1,10 @@
+***** ######################################################### *****
+***** Start Time : Wed Oct  2 12:52:10 2024
+args: {'lr': 0.001, 'epochs': 10.0, 'classes': 10, 'init_checkpoint_path': None, 'scheduler': None}
+***** ######################################################### *****
+***** Start Time : Wed Oct  2 14:00:06 2024
+args: {'lr': 0.001, 'epochs': 10.0, 'classes': 10, 'init_checkpoint_path': None, 'scheduler': None}
+***** ######################################################### *****
+***** Start Time : Wed Oct  2 14:01:47 2024
+args: {'lr': 0.001, 'epochs': 10.0, 'classes': 10, 'init_checkpoint_path': None, 'scheduler': None}
+Epoch 0 ** stat: {'Train Loss': '2.4355', 'Train Acc': '0.10', 'Val Loss': '2.3100', 'Val Acc': '0.07', 'patience': '1/100'}

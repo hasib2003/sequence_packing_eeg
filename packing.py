@@ -88,7 +88,7 @@ class ExamplePacking:
                     # print("samples[depth_explored] ",samples[depth_explored])
                     # print("before tar_bin ",tar_bin[:,bin_used:bin_used+curr_seq_length])
 
-                    tar_bin[:,bin_used:bin_used+curr_seq_length] = ExamplePacking.standardize_rows(samples[depth_explored])
+                    tar_bin[:,bin_used:bin_used+curr_seq_length] = samples[depth_explored]
                     
                     # print("tar_bin afters ",tar_bin[:,bin_used:bin_used+curr_seq_length])
                     # print(f"Sample shape: {samples[depth_explored].shape}, Bin shape: {tar_bin[:, bin_used:bin_used + curr_seq_length].shape}")
